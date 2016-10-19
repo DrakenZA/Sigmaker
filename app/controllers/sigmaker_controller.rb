@@ -1,5 +1,5 @@
 class SigmakerController < ApplicationController
-
+after_filter :set_header_for_iframe
 def gensig
 
 
@@ -8,6 +8,13 @@ def gensig
 print @sig
 end
 
+
+
+
+private
+def set_header_for_iframe
+  response.headers.delete "X-Frame-Options"
+end
 
 
 end
