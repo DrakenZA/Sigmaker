@@ -1,0 +1,90 @@
+<style>
+  @font-face { font-family: Museo-Sans; src: url('MuseoSans_700.otf') format('truetype'), url('museo-sans-700.woff') format('woff'); }
+  h1#orange {font-family: Museo-Sans; color: #f7931e ; style="font-weight: 700; font-size: 40px; display: inline; }
+  h1#there4 {font-family: Museo-Sans; color: #f7931e ; style="font-weight: bold; font-size: 60px; display: inline; }
+  h1#grey {font-family: Museo-Sans; color: #383838; style="font-weight: 700; font-size: 40px; display: inline;}
+
+  a:link {font-family: Helvetica; color: #7b7b7b; font-weight: 200; font-size: 10px; margin: 4px 0 15px 0; text-decoration: none; }
+
+  a:visited {font-family: Helvetica; color: #7b7b7b; font-weight: 200; font-size: 10px; margin: 4px 0 15px 0; text-decoration: none; }
+  /*Tooltip*/
+
+/* Styling dfn tag to highlight the word with the tooltip */
+  dfn {
+    background: rgba(0,0,0,0.2);
+    border-bottom: dashed 1px rgba(0,0,0,0.8);
+    padding: 0 0.4em;
+    cursor: help;
+    font-style: normal;
+    position: relative;
+  }
+  dfn::after {
+    content: attr(data-info);
+    display: inline;
+    position: absolute;
+    top: 22px; left: 0;
+    opacity: 0;
+    width: 230px;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.5em;
+    padding: 0.5em 0.8em;
+    background: rgba(0,0,0,0.8);
+    color: #fff;
+    pointer-events: none; /* This prevents the box from apearing when hovered. */
+    transition: opacity 250ms, top 250ms;
+  }
+/*  dfn::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 12px; left: 20px;
+    opacity: 0;
+    width: 0; height: 0;
+    border: solid transparent 5px;
+    border-bottom-color: rgba(0,0,0,0.8);
+    transition: opacity 250ms, top 250ms;
+  }*/
+  dfn:hover {z-index: 2;} /* Keeps the info boxes on top of other elements */
+  dfn:hover::after,
+  dfn:hover::before {opacity: 1;}
+  dfn:hover::after {top: 30px;}
+  dfn:hover::before {top: 20px;}
+
+
+</style>
+
+
+<table class="email-banner">
+  <tbody>
+    <tr>
+      <td class="logo" style="padding: 5px 0">
+
+        <h1 style="font-family: Museo-Sans; color: #383838; style=" font-weight:="" 700;="" font-size:="" 40px;="" display:="" inline:="">th<span style="color:#f7931e">i<span style="color:#383838">nk <span style="color: #f7931e; font-weight: bold; font-size: 60px;">∴</span></span></span></h1>
+        <!-- <img style="height: 40px" src="logo.png"> -->
+      </td>
+    </tr>
+    <tr>
+      <td class="title">
+        <h1 style="font-family: Helvetica; font-weight: 400; font-size: 20px; display: inline;"><span style="color: #f7931e"><%=@sig.name%></span></h1>
+      </td>
+    </tr>
+    <tr>
+      <td class="info">
+        <p style="font-family: Helvetica; color: #7b7b7b; font-weight: 200; font-size: 12px; margin: 4px 0 15px 0">
+<% @sig.Siglinks.each do |l| %>
+
+          <dfn data-info="<%=l.info%>"><a href="<%=l.linkpath%>"><%=l.title%></a></dfn>
+        <% end%>
+          </p>
+      </td>
+    </tr>
+    <tr>
+      <td class="details" style="padding-top: 8px">
+        <a href="mailto:<%=@sig.email%>" style="font-family: Helvetica; color: #f7931e; margin: 6px 0; font-weight: 400; border: none; font-size: 14px"><%=@sig.email%></a>
+        <p><a href="tel://<%=@sig.phonenum%>" style="font-family: Helvetica; color: #f7931e; margin: 6px 0; font-weight: 400; font-size: 14px"><%=@sig.phonenum%></a></p>
+      </td>
+    </tr>
+  </tbody>
+
+</table>
